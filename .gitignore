@@ -3,3 +3,7 @@
 /SupermarketOnline/bin
 /SupermarketOnline/build
 /SupermarketOnline/logs
+/SupermarketOnlineStatic/dist
+/SupermarketOnlineStatic/node_modules
+/SupermarketOnlineStatic/nginx/temp
+/SupermarketOnlineStatic/nginx/logs
