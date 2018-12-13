@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 测试用mapper -->
+<mapper namespace="top.huhuiyu.supermarketonline.dao.TestDAO">
+
+  <select id="queryTokens" resultType="TbToken">
+    select token,lastupdate from TbToken
+  </select>
+
+  <select id="queryTokens_COUNT" resultType="int">
+    select count(token) from TbToken
+  </select>
+</mapper>
