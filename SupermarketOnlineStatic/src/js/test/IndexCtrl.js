@@ -1,4 +1,4 @@
-(function() {
+(function () {
   var ctrls = angular.module('controllers');
   ctrls.controller('TestIndexCtrl', ['$scope', '$log', TestIndexCtrl]);
 
@@ -6,11 +6,11 @@
     $log.debug('TestIndexCtrl init...');
 
     // 处理scope销毁
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       $log.debug('TestIndexCtrl destroy...');
     });
 
-    $scope.changePage = function(page) {
+    $scope.changePage = function (page) {
       $scope.demopage = 'templates/test/' + page + '.html';
     };
 

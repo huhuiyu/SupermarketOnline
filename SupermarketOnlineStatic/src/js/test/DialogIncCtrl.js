@@ -1,4 +1,4 @@
-(function() {
+(function () {
   var ctrls = angular.module('controllers');
   ctrls.controller('TestDialogIncCtrl', [
     '$scope',
@@ -14,20 +14,20 @@
     $scope.ts = cdata.ts;
 
     // 处理scope销毁
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       $log.debug('TestDialogIncCtrl destroy...');
     });
 
     $scope.data = {};
 
-    $scope.ok = function() {
+    $scope.ok = function () {
       DialogService.hideCustom();
       var result = {};
       angular.copy($scope.data, result);
       parent.result(result);
     };
 
-    $scope.cancel = function() {
+    $scope.cancel = function () {
       DialogService.hideCustom();
       parent.result(null);
     };

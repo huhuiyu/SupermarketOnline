@@ -1,11 +1,11 @@
 {
-  "name": "angularjs.base",
-  "version": "1.0.0.1",
-  "description": "angularjs基础项目",
+  "name": "supermarketonline",
+  "version": "1.0.0.0",
+  "description": "在线商城",
   "author": "胡辉煜",
   "repository": {
     "type": "git",
-    "url": "https://github.com/huhuiyu/angularjs-base.git"
+    "url": "git@github.com:huhuiyu/SupermarketOnline.git"
   },
   "license": "Apache-2.0",
   "dependencies": {
