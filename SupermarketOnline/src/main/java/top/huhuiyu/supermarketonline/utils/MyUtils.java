@@ -16,8 +16,8 @@ public class MyUtils {
   /**
    * isEmpty-判断是否是null或者是全部都是空白字符
    *
-   * @param value
-   * @return
+   * @param value 字符
+   * @return 是否是null或者是全部都是空白字符
    */
   public static boolean isEmpty(String value) {
     return value == null || "".equals(value.trim());
@@ -26,8 +26,8 @@ public class MyUtils {
   /**
    * trim-去掉头尾空白字符，null值也會返回成空字符串
    *
-   * @param value
-   * @return
+   * @param value 字符
+   * @return 去掉头尾空白字符
    */
   public static String trim(String value) {
     if (isEmpty(value)) {

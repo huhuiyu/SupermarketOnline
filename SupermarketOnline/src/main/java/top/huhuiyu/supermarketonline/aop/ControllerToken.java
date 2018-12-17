@@ -24,13 +24,6 @@ public class ControllerToken extends BaseAop {
   @Autowired
   private AopService aopService;
 
-  /**
-   * -处理客户端提交的Token
-   *
-   * @param pjp
-   * @return
-   * @throws Exception
-   */
   private TbToken processInputToken(ProceedingJoinPoint pjp) throws Exception {
     TbToken token = null;
     BaseModel model = null;
@@ -55,13 +48,6 @@ public class ControllerToken extends BaseAop {
     return token;
   }
 
-  /**
-   * -处理应答的Token信息
-   *
-   * @param result
-   * @param token
-   * @throws Exception
-   */
   private void processResponseToken(Object result, TbToken token) throws Exception {
     // 回发token信息
     if (result instanceof JsonMessage && token != null) {
@@ -70,13 +56,6 @@ public class ControllerToken extends BaseAop {
     }
   }
 
-  /**
-   * -控制器token相关切面处理
-   * 
-   * @param pjp
-   * @return
-   * @throws Throwable
-   */
   @Around("controllerPointcut()")
   public Object token(ProceedingJoinPoint pjp) throws Throwable {
     TbToken token = processInputToken(pjp);

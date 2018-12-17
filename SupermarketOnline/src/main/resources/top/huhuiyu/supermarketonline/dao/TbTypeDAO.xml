@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- TbTypeDAO mapper -->
+<mapper namespace="top.huhuiyu.supermarketonline.dao.TbTypeDAO">
+  <!-- 分页查询 -->
+  <select id="queryAll" resultType="TbType">
+    select tid,typeName,typeInfo,isEnable,lastupdate from TbType
+  </select>
+  <select id="queryAll_COUNT" resultType="int">
+    select count(tid) from TbType
+  </select>
+  <!-- 按照主键查询 -->
+  <select id="queryByKey" resultType="TbType" parameterType="TbType">
+    select tid,typeName,typeInfo,isEnable,lastupdate from TbType
+    where tid=#{tid}
+  </select>
+  <!-- 添加 -->
+  <insert id="add" parameterType="TbType">
+    insert into TbType(typeName,typeInfo) values(#{typeName},#{typeInfo})
+  </insert>
+  <!-- 修改 -->
+  <update id="update" parameterType="TbType">
+    update TbType
+    set typeName=#{typeName},typeInfo=#{typeInfo},isEnable=#{isEnable},lastupdate=now()
+    where tid=#{tid}
+  </update>
+  <!-- 删除（停用）或者反删除（启用） -->
+  <update id="delete" parameterType="TbType">
+    update TbType
+    set isEnable=#{isEnable},lastupdate=now()
+    where tid=#{tid}
+  </update>
+</mapper>

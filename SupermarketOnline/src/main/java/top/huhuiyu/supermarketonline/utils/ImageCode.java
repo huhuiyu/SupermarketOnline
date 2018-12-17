@@ -32,7 +32,7 @@ public class ImageCode {
   /**
    * -生成默认长度的随机字符
    *
-   * @return
+   * @return 默认长度的随机字符
    */
   public static String makeCode() {
     return makeCode(LENGTH);
@@ -41,8 +41,8 @@ public class ImageCode {
   /**
    * -生成指定长度的随机字符
    *
-   * @param length
-   * @return
+   * @param length 长度
+   * @return 指定长度的随机字符
    */
   public static String makeCode(int length) {
     length = length < LENGTH ? LENGTH : length;
@@ -57,8 +57,8 @@ public class ImageCode {
   /**
    * -绘制code对应的图片
    *
-   * @param code
-   * @return
+   * @param code 图片码
+   * @return 图片码
    */
   public static BufferedImage makeImage(String code) {
     // 绘图高度

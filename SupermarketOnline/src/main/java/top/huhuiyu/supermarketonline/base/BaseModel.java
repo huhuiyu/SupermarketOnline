@@ -32,7 +32,7 @@ public abstract class BaseModel extends BaseEntity {
   /**
    * getToken的委托方法，将客户端获取的token信息转递给TbToken对象
    *
-   * @return
+   * @return TbToken对象
    */
   public TbToken makeTbToken() {
     TbToken tbToken = new TbToken();
@@ -43,7 +43,7 @@ public abstract class BaseModel extends BaseEntity {
   /**
    * getToken的委托方法，将客户端获取的token信息转递给TbTokenInfo对象
    *
-   * @return
+   * @return TbTokenInfo对象
    */
   public TbTokenInfo makeTbTokenInfo() {
     TbTokenInfo info = new TbTokenInfo();

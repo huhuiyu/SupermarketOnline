@@ -41,7 +41,7 @@ public class JsonMessage extends BaseEntity {
    * @param success 是否成功应答
    * @param code    服务器应答code
    * @param message 服务器应答信息
-   * @return
+   * @return JsonMessage的实例
    */
   public static JsonMessage getMessage(boolean success, int code, String message) {
     JsonMessage json = new JsonMessage();
@@ -55,7 +55,7 @@ public class JsonMessage extends BaseEntity {
    * getSuccess：委托方法，获取成功的应答
    *
    * @param message 成功的消息
-   * @return
+   * @return JsonMessage的实例
    */
   public static JsonMessage getSuccess(String message) {
     // 成功应答的success为ture，code为200
@@ -65,9 +65,9 @@ public class JsonMessage extends BaseEntity {
   /**
    * getFail：委托方法，获取指定错误code的失败应答
    *
-   * @param code
-   * @param message
-   * @return
+   * @param code    代码
+   * @param message 消息
+   * @return JsonMessage的实例
    */
   public static JsonMessage getFail(int code, String message) {
     // 指定code的错误应答
@@ -77,8 +77,8 @@ public class JsonMessage extends BaseEntity {
   /**
    * getFail：错误应答的委托方法
    *
-   * @param message
-   * @return
+   * @param message 消息
+   * @return JsonMessage的实例
    */
   public static JsonMessage getFail(String message) {
     return JsonMessage.getMessage(false, 500, message);
@@ -89,7 +89,7 @@ public class JsonMessage extends BaseEntity {
    *
    * @param key  应答的key
    * @param data 应答的数据
-   * @return
+   * @return JsonMessage的实例
    */
   public JsonMessage put(String key, Object data) {
     datas.put(key, data);

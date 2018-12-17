@@ -33,22 +33,4 @@
     )
     )
   </delete>
-
-  <!-- 用户相关 -->
-  <select id="queryUserByToken" parameterType="TbTokenInfo" resultType="TbTokenInfo">
-    select token,infokey,info,lastupdate from TbTokenInfo where token=#{token} and infokey='user'
-  </select>
-
-  <insert id="addUser" parameterType="TbTokenInfo">
-    insert into TbTokenInfo(token,infokey,info,lastupdate) values(#{token},'user',#{info},now())
-  </insert>
-
-  <update id="updateUser" parameterType="TbTokenInfo">
-    update TbTokenInfo set info=#{info},lastupdate=now() where token=#{token} and infokey='user'
-  </update>
-
-  <delete id="deleteUser" parameterType="TbTokenInfo">
-    delete from TbTokenInfo where token=#{token} and infokey='user'
-  </delete>
-
 </mapper>

@@ -15,8 +15,8 @@ public interface UtilsDAO {
   /**
    * -查询系统时间
    *
-   * @return
-   * @throws Exception
+   * @return 查询结果
+   * @throws Exception 处理发生错误
    */
   Date queryTime() throws Exception;
 }
