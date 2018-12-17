@@ -33,6 +33,15 @@ public interface TbTypeDAO {
   public TbType queryByKey(TbType tbType) throws Exception;
 
   /**
+   * 按照typeName查询
+   * 
+   * @param tbType typeName值
+   * @return typeName查询结果
+   * @throws Exception 处理发生错误
+   */
+  public TbType queryByTypeName(TbType tbType) throws Exception;
+
+  /**
    * 添加
    * 
    * @param tbType 添加数据
@@ -58,4 +67,5 @@ public interface TbTypeDAO {
    * @throws Exception 处理发生错误
    */
   int delete(TbType tbType) throws Exception;
+
 }

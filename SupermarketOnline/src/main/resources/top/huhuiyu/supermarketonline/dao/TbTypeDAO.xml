@@ -16,6 +16,11 @@
     select tid,typeName,typeInfo,isEnable,lastupdate from TbType
     where tid=#{tid}
   </select>
+  <!-- 按照名称查询 -->
+  <select id="queryByTypeName" resultType="TbType" parameterType="TbType">
+    select tid,typeName,typeInfo,isEnable,lastupdate from TbType
+    where typeName=#{typeName}
+  </select>
   <!-- 添加 -->
   <insert id="add" parameterType="TbType">
     insert into TbType(typeName,typeInfo) values(#{typeName},#{typeInfo})
