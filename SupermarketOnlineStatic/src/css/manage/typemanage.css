@@ -1,0 +1,9 @@
+.typemanage .table td,
+th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.typemanage .pd {
+  padding: 0.5rem;
+}

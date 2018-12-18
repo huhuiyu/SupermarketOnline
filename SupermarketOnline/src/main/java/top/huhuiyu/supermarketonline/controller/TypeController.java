@@ -21,14 +21,27 @@ public class TypeController {
 
   @RequestMapping("/queryAll")
   public JsonMessage queryAll(TbTypeModel model) throws Exception {
-    // /type/queryAll?token=011c9827-ac6c-48fa-9425-c9d9ee4941f8
     return typeService.queryAll(model);
   }
 
   @RequestMapping("/add")
   public JsonMessage add(TbTypeModel model) throws Exception {
-    // /type/add?token=011c9827-ac6c-48fa-9425-c9d9ee4941f8&tbType.typeName=服装&tbType.typeInfo=服装类别
     return typeService.add(model);
+  }
+
+  @RequestMapping("/queryByKey")
+  public JsonMessage queryByKey(TbTypeModel model) throws Exception {
+    return typeService.queryByKey(model);
+  }
+
+  @RequestMapping("/delete")
+  public JsonMessage delete(TbTypeModel model) throws Exception {
+    return typeService.delete(model);
+  }
+
+  @RequestMapping("/update")
+  public JsonMessage update(TbTypeModel model) throws Exception {
+    return typeService.update(model);
   }
 
 }
