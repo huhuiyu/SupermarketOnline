@@ -27,8 +27,9 @@
           <span show-time="{{d.lastupdate}}" format="y-M-d h:m:s"></span>
         </td>
         <td>
-          <span class="btn btn-danger btn-sm" ng-click="toDelete(d);">删除</span>
-          <span class="btn btn-danger btn-sm">修改</span>
+          <span class="btn btn-danger btn-sm" ng-if="d.isEnable=='y'" ng-click="toDelete(d);">禁用</span>
+          <span class="btn btn-primary btn-sm" ng-if="d.isEnable=='n'" ng-click="toUnDelete(d);">启用</span>
+          <span class="btn btn-danger btn-sm" ng-click="toUpdate(d);">修改</span>
         </td>
       </tr>
     </table>

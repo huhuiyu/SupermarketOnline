@@ -55,4 +55,13 @@ public interface TypeService {
    * @throws Exception 处理发生异常
    */
   JsonMessage queryByKey(TbTypeModel model) throws Exception;
+
+  /**
+   * 反删除
+   * 
+   * @param model 页面数据
+   * @return 反删除结果
+   * @throws Exception 处理发生异常
+   */
+  JsonMessage undelete(TbTypeModel model) throws Exception;
 }

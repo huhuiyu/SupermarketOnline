@@ -39,6 +39,11 @@ public class TypeController {
     return typeService.delete(model);
   }
 
+  @RequestMapping("/undelete")
+  public JsonMessage undelete(TbTypeModel model) throws Exception {
+    return typeService.undelete(model);
+  }
+
   @RequestMapping("/update")
   public JsonMessage update(TbTypeModel model) throws Exception {
     return typeService.update(model);

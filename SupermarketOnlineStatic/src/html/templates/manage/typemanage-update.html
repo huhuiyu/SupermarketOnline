@@ -1,0 +1,14 @@
+<div ng-controller="TypeManageUpdateCtrl">
+  <div class="form-group">
+    <input type="text" ng-model="formdata.typeName" class="form-control" placeholder="请输入分类名称">
+    <input type="text" ng-model="formdata.typeInfo" class="form-control" placeholder="请输入分类描述">
+    <select class="form-control" ng-model="formdata.isEnable">
+      <option value="y">启用</option>
+      <option value="n">禁用</option>
+    </select>
+  </div>
+  <div class="text-right">
+    <span class="btn btn-danger btn-sm" ng-click="save();">保存</span>
+    <span class="btn btn-danger btn-sm" ng-click="close();">关闭</span>
+  </div>
+</div>

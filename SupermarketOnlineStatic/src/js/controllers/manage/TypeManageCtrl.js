@@ -52,8 +52,8 @@
 
     //删除
     $scope.toDelete = function (type) {
-      DialogService.showConfirm('是否删除：' + type.typeName + '?', function () {
-        DialogService.showWait('删除中，请稍候...');
+      DialogService.showConfirm('是否禁用：' + type.typeName + '?', function () {
+        DialogService.showWait('禁用中，请稍候...');
         DataService.send('/type/delete', {
           tbType: type
         }, function (data) {
@@ -64,6 +64,30 @@
             }
           });
         });
+      });
+    };
+
+    $scope.toUnDelete = function (type) {
+      DialogService.showConfirm('是否启用：' + type.typeName + '?', function () {
+        DialogService.showWait('启用中，请稍候...');
+        DataService.send('/type/undelete', {
+          tbType: type
+        }, function (data) {
+          DialogService.hideWait();
+          DialogService.showAlert(data.message, function () {
+            if (data.success) {
+              $scope.query();
+            }
+          });
+        });
+      });
+    };
+
+    //修改
+    $scope.toUpdate = function (type) {
+      DialogService.setTempDialogTitle('修改类型数据');
+      DialogService.showCustom('templates/manage/typemanage-update.html', type, function () {
+        $scope.query();
       });
     };
 
