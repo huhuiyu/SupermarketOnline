@@ -33,6 +33,15 @@ public interface TbSubTypeDAO {
   List<TbSubType> queryAll() throws Exception;
 
   /**
+   * 按照tid和subName查询小类信息
+   * 
+   * @param tbSubType 小类信息
+   * @return 小类信息
+   * @throws Exception 处理发生异常
+   */
+  TbSubType queryByTidSubName(TbSubType tbSubType) throws Exception;
+
+  /**
    * 添加小类信息
    * 
    * @param subType 小类信息

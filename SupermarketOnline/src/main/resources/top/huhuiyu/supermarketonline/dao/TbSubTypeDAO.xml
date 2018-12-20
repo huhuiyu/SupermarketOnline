@@ -21,6 +21,12 @@
     where tid in (select tid from TbType where isEnable='y')
   </select>
 
+  <!-- 查询小类名称 -->
+  <select id="queryByTidSubName" parameterType="TbSubType" resultType="TbSubType">
+    select stid,tid,subName,subInfo,isEnable,lastupdate from TbSubType
+    where tid=#{tid} and subName=#{subName}
+  </select>
+  
   <!-- 添加小类信息 -->
   <insert id="add" parameterType="TbSubType">
     insert into TbSubType(tid,subName,subInfo) values(#{tid},#{subName},#{subInfo})

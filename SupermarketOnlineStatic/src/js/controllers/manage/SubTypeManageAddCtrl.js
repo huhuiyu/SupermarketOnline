@@ -24,5 +24,20 @@
       DialogService.hideCustom();
     };
 
+    $scope.add = function () {
+      DialogService.showWait('添加数据中，其稍侯...');
+      DataService.send('/subtype/add', {
+        subType: $scope.formdata
+      }, function (data) {
+        DialogService.hideWait();
+        if (data.success) {
+          $scope.formdata = {
+            tid: $scope.types[0].tid
+          };
+        }
+        DialogService.showAlert(data.message);
+      });
+    };
+
   }
 })();

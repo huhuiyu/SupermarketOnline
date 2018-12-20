@@ -15,6 +15,7 @@ import top.huhuiyu.supermarketonline.entity.TbType;
 import top.huhuiyu.supermarketonline.model.TbSubTypeModel;
 import top.huhuiyu.supermarketonline.service.SubTypeService;
 import top.huhuiyu.supermarketonline.utils.JsonMessage;
+import top.huhuiyu.supermarketonline.utils.MyUtils;
 import top.huhuiyu.supermarketonline.utils.PageBean;
 
 /**
@@ -47,7 +48,20 @@ public class SubTypeServiceImpl implements SubTypeService {
 
   @Override
   public JsonMessage add(TbSubTypeModel model) throws Exception {
-    int result = tbSubTypeDAO.add(model.getSubType());
+    TbSubType subType = model.getSubType();
+    if (subType.getTid() == null || subType.getTid() < 1) {
+      return JsonMessage.getFail("必须选择类型");
+    }
+    if (MyUtils.isEmpty(subType.getSubName())) {
+      return JsonMessage.getFail("名称必须填写");
+    }
+    if (MyUtils.isEmpty(subType.getSubInfo())) {
+      return JsonMessage.getFail("描述必须填写");
+    }
+    if (tbSubTypeDAO.queryByTidSubName(subType) != null) {
+      return JsonMessage.getFail("类型已经存在");
+    }
+    int result = tbSubTypeDAO.add(subType);
     return result == 1 ? JsonMessage.getSuccess("添加成功") : JsonMessage.getFail("添加失败");
   }
 

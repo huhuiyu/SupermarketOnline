@@ -47,5 +47,33 @@
       });
     };
 
+    //解决tid显示成名称的问题
+    $scope.showTypeName = function (tid) {
+      for (var i = 0; i < $scope.types.length; i++) {
+        var type = $scope.types[i];
+        if (tid == type.tid) {
+          return type.typeName;
+        }
+      }
+      return '';
+    };
+
+    //启用和禁用
+    $scope.changeEnable = function (subtype, enable) {
+      var url = enable == 'y' ? '/subtype/enable' : '/subtype/disable';
+      DialogService.showWait('处理中，请稍候');
+      DataService.send(url, {
+        subType: subtype
+      }, function (data) {
+        DialogService.hideWait();
+        DialogService.showAlert(data.message, function () {
+          if (data.success) {
+            $scope.query();
+          }
+        });
+      });
+
+    };
+
   }
 })();
