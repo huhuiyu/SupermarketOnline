@@ -12,7 +12,7 @@
 
     $scope.page = {
       pageNumber: 1,
-      pageSize: 3
+      pageSize: 10
     };
 
     $scope.query = function () {

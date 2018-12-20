@@ -24,3 +24,14 @@ body {
 .mr10 {
   margin: 10px;
 }
+
+/* 表格默认样式 */
+.table td,
+th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.pd {
+  padding: 0.5rem;
+}
