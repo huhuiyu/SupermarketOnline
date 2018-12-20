@@ -30,6 +30,7 @@ public class SubTypeServiceImpl implements SubTypeService {
   @Autowired
   private TbSubTypeDAO tbSubTypeDAO;
 
+  @Override
   public JsonMessage queryAll(TbSubTypeModel model) throws Exception {
     JsonMessage message = JsonMessage.getSuccess("");
     // 查询分类信息
@@ -44,22 +45,26 @@ public class SubTypeServiceImpl implements SubTypeService {
     return message;
   }
 
+  @Override
   public JsonMessage add(TbSubTypeModel model) throws Exception {
     int result = tbSubTypeDAO.add(model.getSubType());
     return result == 1 ? JsonMessage.getSuccess("添加成功") : JsonMessage.getFail("添加失败");
   }
 
+  @Override
   public JsonMessage update(TbSubTypeModel model) throws Exception {
     int result = tbSubTypeDAO.update(model.getSubType());
     return result == 1 ? JsonMessage.getSuccess("修改成功") : JsonMessage.getFail("修改失败");
   }
 
+  @Override
   public JsonMessage enable(TbSubTypeModel model) throws Exception {
     model.getSubType().setIsEnable("y");
     int result = tbSubTypeDAO.updateIsEnable(model.getSubType());
     return result == 1 ? JsonMessage.getSuccess("启用成功") : JsonMessage.getFail("启用失败");
   }
 
+  @Override
   public JsonMessage disable(TbSubTypeModel model) throws Exception {
     model.getSubType().setIsEnable("n");
     int result = tbSubTypeDAO.updateIsEnable(model.getSubType());
