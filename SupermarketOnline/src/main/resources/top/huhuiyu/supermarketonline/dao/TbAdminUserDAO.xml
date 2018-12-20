@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- TbAdminUserDAO mapper -->
+<mapper namespace="top.huhuiyu.supermarketonline.dao.TbAdminUserDAO">
+  <!-- 按照用户名查询用户信息 -->
+  <select id="queryByUsername" parameterType="TbAdminUser" resultType="TbAdminUser">
+    select auid,username,password,nickname,isEnable,lastupdate from TbAdminUser
+    where username=#{username}
+  </select>
+  <!-- 按照主键查询用户信息 -->
+  <select id="queryByKey" parameterType="TbAdminUser" resultType="TbAdminUser">
+    select auid,username,password,nickname,isEnable,lastupdate from TbAdminUser
+    where auid=#{auid}
+  </select>
+  <!-- token相关 -->
+  <!-- 查询用户登录信息 -->
+  <select id="queryTokenUser" parameterType="TbTokenInfo" resultType="TbAdminUser">
+    select auid,username,password,nickname,isEnable,lastupdate from TbAdminUser
+    where auid = (select info from TbTokenInfo where token=#{token} and infokey='admin-user')
+  </select>
+  <!-- 添加登录用户信息 -->
+  <insert id="saveUserToToken" parameterType="TbTokenInfo">
+    insert into TbTokenInfo(token,infokey,info) values(#{token},'admin-user',#{info})
+  </insert>
+  <!-- 修改登录用户信息 -->
+  <update id="updateTokenUser"  parameterType="TbTokenInfo">
+    update TbTokenInfo set info=#{info},lastupdate=now()
+    where token=#{token} and infokey='admin-user'
+  </update>
+  <!-- 移除登录用户信息 -->
+  <delete id="deleteTokenUser"  parameterType="TbTokenInfo">
+    delete from TbTokenInfo where token=#{token} and infokey='admin-user'
+  </delete>
+</mapper>

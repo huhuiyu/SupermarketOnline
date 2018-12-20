@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- TbSubTypeDAO mapper -->
+<mapper namespace="top.huhuiyu.supermarketonline.dao.TbSubTypeDAO">
+  <!-- 查询可用的TbType -->
+  <select id="queryTypes" resultType="TbType">
+    select tid,typeName,typeInfo,isEnable,lastupdate from TbType
+    where isEnable='y'
+  </select>
+
+  <!-- 查询小类信息 -->
+  <select id="queryAll" resultType="TbSubType">
+    select stid,tid,subName,subInfo,isEnable,lastupdate from TbSubType
+    where tid in (select tid from TbType where isEnable='y')
+  </select>
+
+  <select id="queryAll_COUNT" resultType="int">
+    select count(*) from TbSubType
+    where tid in (select tid from TbType where isEnable='y')
+  </select>
+
+  <!-- 添加小类信息 -->
+  <insert id="add" parameterType="TbSubType">
+    insert into TbSubType(tid,subName,subInfo) values(#{tid},#{subName},#{subInfo})
+  </insert>
+
+  <!-- 修改小类信息 -->
+  <update id="update" parameterType="TbSubType">
+    update TbSubType set tid=#{tid},subName=#{subName},subInfo=#{subInfo},isEnable=#{isEnable},lastupdate=now()
+    where stid=#{stid}
+  </update>
+
+  <!-- 修改启用状态 -->
+  <update id="updateIsEnable" parameterType="TbSubType">
+    update TbSubType set isEnable=#{isEnable},lastupdate=now()
+    where stid=#{stid}
+  </update>
+</mapper>
