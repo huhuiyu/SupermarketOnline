@@ -12,7 +12,7 @@
 
     $scope.page = {
       pageNumber: 1,
-      pageSize: 10
+      pageSize: 3
     };
 
     $scope.query = function () {
@@ -73,6 +73,27 @@
         });
       });
 
+    };
+
+    //分页跳转
+    $scope.toPage = function (pn) {
+      //不能超出范围
+      if (pn <= 0 || pn > $scope.page.pageCount || pn == $scope.page.pageNumber) {
+        return;
+      }
+      //分页查询
+      $scope.page.pageNumber = pn;
+      $scope.query();
+    };
+
+    //转到修改
+    $scope.toUpdate = function (subtype) {
+      DialogService.showCustom('templates/manage/subtypemanage-update.html', {
+        types: $scope.types,
+        type: subtype
+      }, function () {
+        $scope.query();
+      });
     };
 
   }

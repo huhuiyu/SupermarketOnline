@@ -27,6 +27,12 @@
     where tid=#{tid} and subName=#{subName}
   </select>
   
+  <!-- 主键查询 -->
+  <select id="queryByKey" parameterType="TbSubType" resultType="TbSubType">
+    select stid,tid,subName,subInfo,isEnable,lastupdate from TbSubType
+    where stid=#{stid}
+  </select>
+  
   <!-- 添加小类信息 -->
   <insert id="add" parameterType="TbSubType">
     insert into TbSubType(tid,subName,subInfo) values(#{tid},#{subName},#{subInfo})

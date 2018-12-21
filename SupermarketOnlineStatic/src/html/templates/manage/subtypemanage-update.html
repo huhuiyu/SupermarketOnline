@@ -1,0 +1,17 @@
+<div ng-controller="SubTypeManageUpdateCtrl">
+  <div class="form-group">
+    <select ng-model="formdata.tid" class="form-control">
+      <option ng-repeat="t in types" ng-value="t.tid" ng-bind="t.typeName" title="{{t.typeInfo}}"></option>
+    </select>
+    <input type="text" ng-model="formdata.subName" class="form-control" placeholder="名称">
+    <input type="text" ng-model="formdata.subInfo" class="form-control" placeholder="描述">
+    <select ng-model="formdata.isEnable" class="form-control">
+      <option value="y">启用</option>
+      <option value="n">禁用</option>
+    </select>
+  </div>
+  <div class="text-right">
+    <span class="btn btn-primary" ng-click="save();">保存</span>
+    <span class="btn btn-primary" ng-click="close();">关闭</span>
+  </div>
+</div>

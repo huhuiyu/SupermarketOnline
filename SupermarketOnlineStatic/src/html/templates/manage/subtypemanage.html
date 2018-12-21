@@ -31,10 +31,30 @@
         <td>
           <span ng-if="d.isEnable=='y'" class="btn btn-danger btn-sm" ng-click="changeEnable(d,'n')">禁用</span>
           <span ng-if="d.isEnable=='n'" class="btn btn-primary btn-sm" ng-click="changeEnable(d,'y')">启用</span>
-          <span class="btn btn-danger btn-sm">修改</span>
+          <span class="btn btn-danger btn-sm" ng-click="toUpdate(d);">修改</span>
         </td>
       </tr>
     </table>
-
+    <nav class="text-center" ng-if="page.pageCount>1">
+      <ul class="pagination">
+        <li>
+          <a href="javascript:void(0);" ng-click="toPage(1);">首页</a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" ng-click="toPage(page.pageNumber-1);">上一页</a>
+        </li>
+        <li>
+          <a href="javascript:void(0);">
+            {{page.total}}/{{page.pageNumber}}/{{page.pageCount}}
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" ng-click="toPage(page.pageNumber+1);">下一页</a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" ng-click="toPage(page.pageCount);">尾页</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
