@@ -1,0 +1,12 @@
+<div ng-controller="ManageMainCtrl" class="manage-main">
+  <div class="main">
+    <div class="menu">
+      <span class="btn btn-danger" ng-click="changePage('typemanage');">类型管理</span>
+      <br>
+      <span class="btn btn-danger" ng-click="changePage('subtypemanage');">小类管理</span>
+    </div>
+    <div class="include">
+      <div ng-include="inc"></div>
+    </div>
+  </div>
+</div>

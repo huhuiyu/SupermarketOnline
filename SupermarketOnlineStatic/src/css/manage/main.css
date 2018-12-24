@@ -1,0 +1,11 @@
+.manage-main .main {
+  display: flex;
+}
+
+.manage-main .menu span {
+  margin: 0.5rem;
+}
+
+.manage-main .include {
+  flex-grow: 2;
+}
