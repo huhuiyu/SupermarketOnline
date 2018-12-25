@@ -3,11 +3,14 @@ package top.huhuiyu.supermarketonline.aop;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import top.huhuiyu.supermarketonline.base.BaseAop;
 import top.huhuiyu.supermarketonline.base.BaseModel;
+import top.huhuiyu.supermarketonline.entity.TbAdminUser;
 import top.huhuiyu.supermarketonline.entity.TbToken;
 import top.huhuiyu.supermarketonline.service.AopService;
 import top.huhuiyu.supermarketonline.utils.JsonMessage;
@@ -21,6 +24,11 @@ import top.huhuiyu.supermarketonline.utils.JsonMessage;
 @Aspect
 @Component
 public class ControllerToken extends BaseAop {
+
+  private static final int LOG_FAIL = 1000;
+
+  private static final Logger log = LoggerFactory.getLogger(ControllerToken.class);
+
   @Autowired
   private AopService aopService;
 
@@ -56,9 +64,34 @@ public class ControllerToken extends BaseAop {
     }
   }
 
+  private JsonMessage checkNeedUser(ProceedingJoinPoint pjp, TbToken token) throws Exception {
+    // 处理需要登录的情况
+    Object target = pjp.getTarget();
+    log.debug(String.format("登录检测：%s", target));
+    if (!(target instanceof NeedAdminUser)) {
+      return null;
+    }
+    if (token == null) {
+      return null;
+    }
+    // 只有实现NeedAdminUser接口的控制器且token不为空才需要登录检测
+    NeedAdminUser nau = (NeedAdminUser) target;
+    TbAdminUser user = aopService.checkAdminUser(token);
+    if (user == null) {
+      return JsonMessage.getFail(LOG_FAIL, "需要登录");
+    }
+    nau.setUser(user);
+    return null;
+  }
+
   @Around("controllerPointcut()")
   public Object token(ProceedingJoinPoint pjp) throws Throwable {
     TbToken token = processInputToken(pjp);
+    JsonMessage check = checkNeedUser(pjp, token);
+    // 如果有返回值，表示检测失败
+    if (check != null) {
+      return check;
+    }
     Object result = null;
     // 处理业务逻辑
     result = pjp.proceed();

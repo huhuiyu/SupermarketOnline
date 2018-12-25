@@ -1,9 +1,13 @@
 package top.huhuiyu.supermarketonline.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import top.huhuiyu.supermarketonline.aop.NeedAdminUser;
+import top.huhuiyu.supermarketonline.entity.TbAdminUser;
 import top.huhuiyu.supermarketonline.model.TbTypeModel;
 import top.huhuiyu.supermarketonline.service.TypeService;
 import top.huhuiyu.supermarketonline.utils.JsonMessage;
@@ -15,12 +19,16 @@ import top.huhuiyu.supermarketonline.utils.JsonMessage;
  */
 @RestController
 @RequestMapping("/type")
-public class TypeController {
+public class TypeController implements NeedAdminUser {
+
+  private static final Logger log = LoggerFactory.getLogger(TypeController.class);
+
   @Autowired
   private TypeService typeService;
 
   @RequestMapping("/queryAll")
   public JsonMessage queryAll(TbTypeModel model) throws Exception {
+    log.debug(String.format("用户信息：%s", user));
     return typeService.queryAll(model);
   }
 
@@ -48,5 +56,23 @@ public class TypeController {
   public JsonMessage update(TbTypeModel model) throws Exception {
     return typeService.update(model);
   }
+
+  // 登录用户信息=====================================================
+  /**
+   * 登录用户信息
+   */
+  private TbAdminUser user;
+
+  @Override
+  public TbAdminUser getUser() {
+    return user;
+  }
+
+  @Override
+  public void setUser(TbAdminUser user) {
+    this.user = user;
+  }
+
+  // 登录用户信息=====================================================
 
 }
