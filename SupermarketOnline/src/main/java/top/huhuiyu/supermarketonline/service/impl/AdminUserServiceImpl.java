@@ -39,7 +39,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     if (!"y".equalsIgnoreCase(suser.getIsEnable())) {
       return JsonMessage.getFail("用户已经冻结");
     }
-    if (suser.getPassword().equalsIgnoreCase(user.getPassword())) {
+    if (!suser.getPassword().equalsIgnoreCase(user.getPassword())) {
       return JsonMessage.getFail("密码错误");
     }
     return JsonMessage.getSuccess("登录成功");

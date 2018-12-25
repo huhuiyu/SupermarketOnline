@@ -10,23 +10,22 @@
             <span class="input-group-addon">
               <i class="iconfont">&#xe63f;</i>
             </span>
-            <input type="text" class="form-control" autocomplete="off" placeholder="请输入用户名">
+            <input type="text" ng-model="formdata.username" class="form-control" autocomplete="off" placeholder="请输入用户名">
           </div>
           <div class="input-group">
             <span class="input-group-addon">
               <i class="iconfont">&#xe63a;</i>
             </span>
-            <input type="password" class="form-control" autocomplete="off" placeholder="请输入密码">
+            <input type="password" ng-model="formdata.password" class="form-control" autocomplete="off" placeholder="请输入密码">
           </div>
-
         </div>
       </div>
       <div class="panel-footer text-center">
-        <span class="btn btn-danger btn-sm">
+        <span class="btn btn-danger btn-sm" ng-click="login();">
           <i class="iconfont">&#xe655;</i>
           登录
         </span>
-        <span class="btn btn-info btn-sm">
+        <span class="btn btn-info btn-sm" ng-click="formdata={}">
           <i class="iconfont">&#xe627;</i>
           重填
         </span>
