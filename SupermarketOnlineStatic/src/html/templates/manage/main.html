@@ -2,9 +2,11 @@
   <div ng-include="'templates/manage/userinfo.html'"></div>
   <div class="main">
     <div class="menu">
-      <span class="btn btn-danger" ng-click="changePage('typemanage');">类型管理</span>
+      <span class="btn" ng-class="{true:'btn-primary',false:'btn-danger'}[hashPage=='typemanage.html']" ng-click="changePage('typemanage');">类型管理</span>
       <br>
-      <span class="btn btn-danger" ng-click="changePage('subtypemanage');">小类管理</span>
+      <span class="btn" ng-class="{true:'btn-primary',false:'btn-danger'}[hashPage=='subtypemanage.html']" ng-click="changePage('subtypemanage');">小类管理</span>
+      <br>
+      <span class="btn" ng-class="{true:'btn-primary',false:'btn-danger'}[hashPage=='configmanage.html']" ng-click="changePage('configmanage');">配置管理</span>
     </div>
     <div class="include">
       <div ng-include="inc"></div>

@@ -3,6 +3,12 @@ package top.huhuiyu.supermarketonline.base;
 import top.huhuiyu.supermarketonline.aop.NeedAdminUser;
 import top.huhuiyu.supermarketonline.entity.TbAdminUser;
 
+/**
+ * 带登录控制的控制器
+ * 
+ * @author DarkKnight
+ *
+ */
 public abstract class BaseAdminUserController implements NeedAdminUser {
 
   /**

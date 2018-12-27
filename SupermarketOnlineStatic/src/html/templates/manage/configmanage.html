@@ -1,0 +1,17 @@
+<div ng-controller="ConfigManageCtrl" class="manage-config">
+  <div class="main-div">
+    <p class="text-center text-danger">配置管理</p>
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon" title="{{tokenTimeout.lastupdate}}">token过期时间(分钟)</span>
+        <input type="text" ng-model="tokenTimeout.configValue" class="form-control">
+        <span class="input-group-addon btn btn-danger btn-sm" ng-click="saveTokenTimeout();">保存</span>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon" title="{{title.lastupdate}}">网站标题信息</span>
+        <input type="text" ng-model="title.configValue" class="form-control">
+        <span class="input-group-addon btn btn-danger btn-sm" ng-click="saveTitle();">保存</span>
+      </div>
+    </div>
+  </div>
+</div>
