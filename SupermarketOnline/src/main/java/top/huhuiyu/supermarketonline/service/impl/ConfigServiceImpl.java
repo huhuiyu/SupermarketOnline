@@ -22,6 +22,13 @@ public class ConfigServiceImpl implements ConfigService {
   private TbConfigDAO tbConfigDAO;
 
   @Override
+  public JsonMessage queryWebConfig(ConfigModel model) throws Exception {
+    JsonMessage message = JsonMessage.getSuccess("");
+    message.put("title", tbConfigDAO.queryTitle());
+    return message;
+  }
+
+  @Override
   public JsonMessage queryConfig(ConfigModel model) throws Exception {
     JsonMessage message = JsonMessage.getSuccess("");
     message.put("tokenTimeout", tbConfigDAO.queryTokenTimeout());

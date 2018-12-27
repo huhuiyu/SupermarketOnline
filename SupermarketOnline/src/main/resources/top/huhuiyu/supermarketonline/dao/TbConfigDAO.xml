@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- TbConfigDAO mapper -->
 <mapper namespace="top.huhuiyu.supermarketonline.dao.TbConfigDAO">
-<select id="queryTitle" resultType="TbConfig">
+  <select id="queryTitle" resultType="TbConfig">
     select configKey,configValue,lastupdate from TbConfig
     where configKey='title'
   </select>
