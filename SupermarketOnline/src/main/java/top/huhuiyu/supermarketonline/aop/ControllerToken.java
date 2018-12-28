@@ -32,24 +32,28 @@ public class ControllerToken extends BaseAop {
   @Autowired
   private AopService aopService;
 
-  private TbToken processInputToken(ProceedingJoinPoint pjp) throws Exception {
-    TbToken token = null;
+  private BaseModel getBaseModel(ProceedingJoinPoint pjp) throws Exception {
     BaseModel model = null;
-    // 校验是否存在BaseModel参数
-    boolean haveBaseModel = false;
     Object[] args = pjp.getArgs();
     for (Object arg : args) {
       if (arg instanceof BaseModel) {
         // 获取客户端token
-        haveBaseModel = true;
         model = (BaseModel) arg;
-        token = model.makeTbToken();
         break;
       }
     }
+    return model;
+  }
+
+  private TbToken processInputToken(ProceedingJoinPoint pjp) throws Exception {
+    TbToken token = null;
+    BaseModel model = getBaseModel(pjp);
+    if (model != null) {
+      token = model.makeTbToken();
+    }
     // 处理token信息更新
     token = aopService.createOrUpdateToken(token);
-    if (haveBaseModel) {
+    if (model != null) {
       // 更新model中的token信息
       model.setToken(token.getToken());
     }
@@ -81,6 +85,11 @@ public class ControllerToken extends BaseAop {
       return JsonMessage.getFail(LOG_FAIL, "需要登录");
     }
     nau.setUser(user);
+    // 给model注入登录用户信息
+    BaseModel model = getBaseModel(pjp);
+    if (model != null) {
+      model.setTbAdminUser(user);
+    }
     return null;
   }
 

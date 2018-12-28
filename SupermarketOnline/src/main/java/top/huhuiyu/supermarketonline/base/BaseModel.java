@@ -1,5 +1,6 @@
 package top.huhuiyu.supermarketonline.base;
 
+import top.huhuiyu.supermarketonline.entity.TbAdminUser;
 import top.huhuiyu.supermarketonline.entity.TbToken;
 import top.huhuiyu.supermarketonline.entity.TbTokenInfo;
 
@@ -49,6 +50,16 @@ public abstract class BaseModel extends BaseEntity {
     TbTokenInfo info = new TbTokenInfo();
     info.setToken(token);
     return info;
+  }
+
+  private TbAdminUser tbAdminUser;
+
+  public TbAdminUser getTbAdminUser() {
+    return tbAdminUser;
+  }
+
+  public void setTbAdminUser(TbAdminUser tbAdminUser) {
+    this.tbAdminUser = tbAdminUser;
   }
 
 }

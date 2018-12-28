@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
+import top.huhuiyu.supermarketonline.dao.TbLogsDAO;
 import top.huhuiyu.supermarketonline.dao.TbTypeDAO;
+import top.huhuiyu.supermarketonline.entity.TbLogs;
 import top.huhuiyu.supermarketonline.entity.TbType;
 import top.huhuiyu.supermarketonline.model.TbTypeModel;
 import top.huhuiyu.supermarketonline.service.TypeService;
@@ -25,6 +27,8 @@ import top.huhuiyu.supermarketonline.utils.PageBean;
 public class TypeServiceImpl implements TypeService {
   @Autowired
   private TbTypeDAO tbTypeDAO;
+  @Autowired
+  private TbLogsDAO tbLogsDAO;
 
   @Override
   public JsonMessage queryAll(TbTypeModel model) throws Exception {
@@ -52,6 +56,15 @@ public class TypeServiceImpl implements TypeService {
       return JsonMessage.getFail("分类名称已经存在");
     }
     int result = tbTypeDAO.add(model.getTbType());
+    // 添加日志信息
+    TbLogs logs = new TbLogs();
+    // 操作员
+    logs.setOperator(model.getTbAdminUser().getAuid().toString());
+    // 类型
+    logs.setLogtype("typemanage");
+    // 信息
+    logs.setLog(String.format("添加了：%s", model.getTbType()));
+    tbLogsDAO.add(logs);
     return result == 1 ? JsonMessage.getSuccess("添加成功") : JsonMessage.getFail("添加失败");
   }
 
@@ -66,6 +79,12 @@ public class TypeServiceImpl implements TypeService {
   public JsonMessage delete(TbTypeModel model) throws Exception {
     model.getTbType().setIsEnable("n");
     int result = tbTypeDAO.delete(model.getTbType());
+    // 添加日志信息
+    TbLogs logs = new TbLogs();
+    logs.setOperator(model.getTbAdminUser().getAuid().toString());
+    logs.setLogtype("typemanage");
+    logs.setLog(String.format("禁用了：%s", model.getTbType()));
+    tbLogsDAO.add(logs);
     return result == 1 ? JsonMessage.getSuccess("禁用成功！") : JsonMessage.getFail("禁用失败！");
   }
 
@@ -73,12 +92,24 @@ public class TypeServiceImpl implements TypeService {
   public JsonMessage undelete(TbTypeModel model) throws Exception {
     model.getTbType().setIsEnable("y");
     int result = tbTypeDAO.delete(model.getTbType());
+    // 添加日志信息
+    TbLogs logs = new TbLogs();
+    logs.setOperator(model.getTbAdminUser().getAuid().toString());
+    logs.setLogtype("typemanage");
+    logs.setLog(String.format("启用了：%s", model.getTbType()));
+    tbLogsDAO.add(logs);
     return result == 1 ? JsonMessage.getSuccess("启用成功！") : JsonMessage.getFail("启用失败！");
   }
 
   @Override
   public JsonMessage update(TbTypeModel model) throws Exception {
     int result = tbTypeDAO.update(model.getTbType());
+    // 添加日志信息
+    TbLogs logs = new TbLogs();
+    logs.setOperator(model.getTbAdminUser().getAuid().toString());
+    logs.setLogtype("typemanage");
+    logs.setLog(String.format("修改了：%s", model.getTbType()));
+    tbLogsDAO.add(logs);
     return result == 1 ? JsonMessage.getSuccess("修改成功！") : JsonMessage.getFail("修改失败！");
   }
 

@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import top.huhuiyu.supermarketonline.dao.TbAdminUserDAO;
+import top.huhuiyu.supermarketonline.dao.TbLogsDAO;
 import top.huhuiyu.supermarketonline.entity.TbAdminUser;
+import top.huhuiyu.supermarketonline.entity.TbLogs;
 import top.huhuiyu.supermarketonline.entity.TbTokenInfo;
 import top.huhuiyu.supermarketonline.model.AdminUserModel;
 import top.huhuiyu.supermarketonline.service.AdminUserService;
@@ -24,6 +26,8 @@ public class AdminUserServiceImpl implements AdminUserService {
   private static final String USER_ISENABLE = "y";
   @Autowired
   private TbAdminUserDAO tbAdminUserDAO;
+  @Autowired
+  private TbLogsDAO tbLogsDAO;
 
   @Override
   public JsonMessage login(AdminUserModel model) throws Exception {
@@ -54,6 +58,13 @@ public class AdminUserServiceImpl implements AdminUserService {
       tbAdminUserDAO.deleteTokenUser(tokenInfo);
     }
     tbAdminUserDAO.saveUserToToken(tokenInfo);
+    // 记录登录信息
+    TbLogs logs = new TbLogs();
+    // 用户id
+    logs.setOperator(tokenInfo.getInfo());
+    logs.setLogtype("login");
+    logs.setLog("用户登录");
+    tbLogsDAO.add(logs);
     return JsonMessage.getSuccess("登录成功");
   }
 
