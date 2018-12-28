@@ -17,10 +17,11 @@ public interface TbLogsDAO {
   /**
    * 分页查询
    * 
+   * @param logs 查询参数
    * @return 分页查询结果
    * @throws Exception 处理发生异常
    */
-  public List<TbLogs> queryAll() throws Exception;
+  public List<TbLogs> queryAll(TbLogs logs) throws Exception;
 
   /**
    * 添加log

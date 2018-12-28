@@ -4,10 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- TbConfigDAO mapper -->
 <mapper namespace="top.huhuiyu.supermarketonline.dao.TbLogsDAO">
-  <select id="queryAll" resultType="TbLogs">
-    select lid,operator,log,logtype,lastupdate from TbLogs order by lastupdate desc
+  <select id="queryAll" resultType="TbLogs" parameterType="TbLogs">
+    select a.lid,a.operator,a.log,a.logtype,a.lastupdate,b.username 'adminUser.username',b.nickname 'adminUser.nickname'
+    from TbLogs a
+    left join TbAdminUser b on a.operator=b.auid
+    order by a.lastupdate desc
   </select>
-  <select id="queryAll_COUNT" resultType="int">
+  <select id="queryAll_COUNT" resultType="int" parameterType="TbLogs">
     select count(*) from TbLogs
   </select>
   <insert id="add" parameterType="TbLogs">

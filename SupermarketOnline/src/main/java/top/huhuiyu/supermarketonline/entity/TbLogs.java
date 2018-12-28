@@ -19,8 +19,17 @@ public class TbLogs extends BaseEntity {
   private String log;
   private String logtype;
   private Date lastupdate;
+  private TbAdminUser adminUser;
 
   public TbLogs() {
+  }
+
+  public TbAdminUser getAdminUser() {
+    return adminUser;
+  }
+
+  public void setAdminUser(TbAdminUser adminUser) {
+    this.adminUser = adminUser;
   }
 
   public Integer getLid() {

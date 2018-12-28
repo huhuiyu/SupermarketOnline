@@ -26,10 +26,11 @@ public class LogsServiceImpl implements LogsService {
   @Autowired
   private TbLogsDAO tbLogsDAO;
 
+  @Override
   public JsonMessage queryAll(LogsModel model) throws Exception {
     PageBean page = model.getPage();
     PageHelper.startPage(page.getPageNumber(), page.getPageSize());
-    Page<TbLogs> list = (Page<TbLogs>) tbLogsDAO.queryAll();
+    Page<TbLogs> list = (Page<TbLogs>) tbLogsDAO.queryAll(model.getTbLogs());
     page.setPageInfo(list);
     JsonMessage message = JsonMessage.getSuccess("");
     message.put("page", page);
